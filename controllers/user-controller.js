@@ -1,4 +1,4 @@
-const { Thought, User } = require('../models/user');
+const { Thought, User } = require('../models');
 
 module.exports = {
     //Get all users, send in json response
