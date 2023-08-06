@@ -47,7 +47,7 @@ module.exports = {
     //Update thought
     updateThought (req, res) {
         //Find user by id in request params
-        Thought.findOneandUpdate(
+        Thought.findOneAndUpdate(
             { _id: req.params.thoughtId},
             //Set thought to request body, updating with new information passed in request
             { $set: req.body},
@@ -73,15 +73,15 @@ module.exports = {
                 return;
             }
             //Update a user's thoughts to remove targeted thought
-            User.findOneAndUpdate(
+            return User.findOneAndUpdate(
                 { thoughts: req.params.thoughtId },
                 { $pull: {thoughts: req.params.thoughtId}},
                 { new: true}
-            )
+            );
             
         }).then((userData) => {
                 if(!userData) {
-                    res.status(404).json({ message: 'No user with this id, failed to delete'})
+                    res.status(404).json({ message: 'No user with this id, but thought still deleted.'})
                     return;
                 }
                 res.json({ message: 'Thought successfully deleted'})
