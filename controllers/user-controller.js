@@ -58,8 +58,7 @@ module.exports = {
                 return;
             };
             //Delete user's associated thoughts 
-            Thought.deleteMany({ _id: {$in: userData.thoughts}})
-            res.json(userData);
+            return Thought.deleteMany({ _id: {$in: userData.thoughts}})
         })
         .then(() => {
         res.json({message: 'User and associated thoughts successfully deleted'})
